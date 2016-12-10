@@ -1,0 +1,82 @@
+#!/bin/bash
+# Run this script as superuser
+
+# Change the variables below to customize
+INSTALLATION_USER='mark'
+SCALA_URL='http://downloads.lightbend.com/scala/2.12.1/scala-2.12.1.tgz'
+GOLANG_URL='https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz'
+FIREFOX_NIGHTLY_URL='https://archive.mozilla.org/pub/firefox/nightly/latest-mozilla-central/firefox-53.0a1.en-US.linux-x86_64.tar.bz2'
+JAVA_VERSION=8
+
+# Update the system before installing the programs
+apt update
+yes | apt upgrade
+yes | apt dist-upgrade
+
+# Install multimedia tools
+yes | apt install amarok flac vorbis-tools libmp3lame0 vlc okular okular-extra-backends
+
+# Install desktop applications
+yes | apt install dropbox gedit gnucash shutter 
+
+# Install command-line applications
+yes | apt install git git-doc git-man pandoc openssh-server tmux vim-nox
+
+# Install Korean fonts and input tools
+yes | apt install fonts-nanum ibus-hangul
+
+# Install LaTeX tools
+yes | apt install texlive-full kile
+
+# Install Java
+yes | apt install openjdk-$JAVA_VERSION-jre openjdk-$JAVA_VERSION-jre-headless openjdk-$JAVA_VERSION-jdk openjdk-$JAVA_VERSION-jdk-headless
+
+# Install Racket
+yes | apt install racket
+
+# Install Python. See https://www.scipy.org/install.html
+yes | apt install python-pip python3-pip python-setuptools python3-setuptools python-tk python3-tk
+pip3 -m install --upgrade pip
+pip3 install ipython numpy scipy matplotlib scikit-learn pandas sympy nose jupyter
+
+# Install Ruby. See https://github.com/rbenv/ruby-build/wiki
+yes | apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+git clone https://github.com/rbenv/rbenv.git /home/$INSTALLATION_USER/.rbenv
+cd /home/$INSTALLATION_USER/.rbenv && src/configure && make -C src
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/$INSTALLATION_USER/.bashrc
+echo 'eval "$(rbenv init -)"' >> /home/$INSTALLATION_USER/.bashrc
+git clone https://github.com/rbenv/ruby-build.git /home/$INSTALLATION_USER/.rbenv/plugins/ruby-build
+chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv
+
+# Install Scala
+# Install scala-sbt. See http://www.scala-sbt.org/download.html
+echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+yes apt install sbt
+# Install scala. See https://www.scala-lang.org/download/install.html
+wget -O /home/$INSTALLATION_USER/Downloads/scala.tgz $SCALA_URL
+tar -xf /home/$INSTALLATION_USER/Downloads/scala.tgz -C /usr/local
+mv /usr/local/scala* /usr/local/scala
+rm -rf /home/$INSTALLATION_USER/Downloads/scala.tgz
+echo 'export SCALA_HOME=/usr/local/scala' >> /home/$INSTALLATION_USER/.bashrc
+echo 'export PATH=$PATH:$SCALA_HOME/bin' >> /home/$INSTALLATION_USER/.bashrc
+
+# Install Golang. See https://golang.org/doc/install
+wget -O /home/$INSTALLATION_USER/Downloads/golang.tar.gz $GOLANG_URL
+tar -xf /home/$INSTALLATION_USER/Downloads/golang.tar.gz -C /usr/local
+mv /usr/local/go* /usr/local/go
+rm -rf /home/$INSTALLATION_USER/Downloads/golang.tar.gz
+echo 'export GOROOT=/usr/local/go' >> /home/$INSTALLATION_USER/.bashrc
+echo 'export PATH=$PATH:$GOROOT/bin' >> /home/$INSTALLATION_USER/.bashrc
+
+# Install Firefox Nightly
+wget -O /home/$INSTALLATION_USER/Downloads/nightly.tar.bz2 $FIREFOX_NIGHTLY_URL
+tar -xf /home/$INSTALLATION_USER/Downloads/nightly.tar.bz2 -C /home/$INSTALLATION_USER/
+rm -rf /home/$INSTALLATION_USER/Downloads/nightly.tar.bz2
+mv /home/$INSTALLATION_USER/firefox* /home/$INSTALLATION_USER/.nightly
+mkdir /home/$INSTALLATION_USER/bin
+ln -s /home/$INSTALLATION_USER/.nightly/firefox /home/$INSTALLATION_USER/bin/nightly
+chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/.nightly
+chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/bin
+chmod 700 /home/$INSTALLATION_USER/bin/nightly
+echo 'export PATH=$PATH:$HOME/bin' >> /home/$INSTALLATION_USER/.bashrc
