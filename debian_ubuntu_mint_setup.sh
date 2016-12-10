@@ -64,7 +64,6 @@ echo 'export PATH=$PATH:$SCALA_HOME/bin' >> /home/$INSTALLATION_USER/.bashrc
 # Install Golang. See https://golang.org/doc/install
 wget -O /home/$INSTALLATION_USER/Downloads/golang.tar.gz $GOLANG_URL
 tar -xf /home/$INSTALLATION_USER/Downloads/golang.tar.gz -C /usr/local
-mv /usr/local/go* /usr/local/go
 rm -rf /home/$INSTALLATION_USER/Downloads/golang.tar.gz
 echo 'export GOROOT=/usr/local/go' >> /home/$INSTALLATION_USER/.bashrc
 echo 'export PATH=$PATH:$GOROOT/bin' >> /home/$INSTALLATION_USER/.bashrc
