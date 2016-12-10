@@ -52,7 +52,7 @@ chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv
 # Install scala-sbt. See http://www.scala-sbt.org/download.html
 echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
-yes apt install sbt
+yes | apt install sbt
 # Install scala. See https://www.scala-lang.org/download/install.html
 wget -O /home/$INSTALLATION_USER/Downloads/scala.tgz $SCALA_URL
 tar -xf /home/$INSTALLATION_USER/Downloads/scala.tgz -C /usr/local
