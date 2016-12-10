@@ -7,6 +7,7 @@ SCALA_URL='http://downloads.lightbend.com/scala/2.12.1/scala-2.12.1.tgz'
 GOLANG_URL='https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz'
 FIREFOX_NIGHTLY_URL='https://archive.mozilla.org/pub/firefox/nightly/latest-mozilla-central/firefox-53.0a1.en-US.linux-x86_64.tar.bz2'
 JAVA_VERSION=8
+NODE_VERSION=6.9.2
 
 # Update the system before installing the programs
 apt update
@@ -67,6 +68,15 @@ tar -xf /home/$INSTALLATION_USER/Downloads/golang.tar.gz -C /usr/local
 rm -rf /home/$INSTALLATION_USER/Downloads/golang.tar.gz
 echo 'export GOROOT=/usr/local/go' >> /home/$INSTALLATION_USER/.bashrc
 echo 'export PATH=$PATH:$GOROOT/bin' >> /home/$INSTALLATION_USER/.bashrc
+
+# Instal Node.js. See https://github.com/creationix/nvm
+git clone https://github.com/creationx/nvm.git /home/$INSTALLATION_USER/.nvm
+echo 'export NVM_DIR=$HOME/.nvm' >> /home/$INSTALLATION_USER/.bashrc
+echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> /home/$INSTALLATION_USER/.bashrc
+chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/.nvm
+sudo -u $INSTALLATION_USER . ~/.bashrc
+sudo -u $INSTALLATION_USER nvm install $NODE_VERSION
+sudo -u $INSTALLATION_USER nvm use $NODE_VERSION
 
 # Install Firefox Nightly
 wget -O /home/$INSTALLATION_USER/Downloads/nightly.tar.bz2 $FIREFOX_NIGHTLY_URL
