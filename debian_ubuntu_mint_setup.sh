@@ -48,7 +48,7 @@ cd /home/$INSTALLATION_USER/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/$INSTALLATION_USER/.bashrc
 echo 'eval "$(rbenv init -)"' >> /home/$INSTALLATION_USER/.bashrc
 git clone https://github.com/rbenv/ruby-build.git /home/$INSTALLATION_USER/.rbenv/plugins/ruby-build
-chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv
+chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv
 sudo -u $INSTALLATION_USER . ~/.bashrc
 sudo -u $INSTALLATION_USER rbenv install $RUBY_VERSION
 sudo -u $INSTALLATION_USER rbenv local $RUBY_VERSION
@@ -77,7 +77,7 @@ echo 'export PATH=$PATH:$GOROOT/bin' >> /home/$INSTALLATION_USER/.bashrc
 git clone https://github.com/creationx/nvm.git /home/$INSTALLATION_USER/.nvm
 echo 'export NVM_DIR=$HOME/.nvm' >> /home/$INSTALLATION_USER/.bashrc
 echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> /home/$INSTALLATION_USER/.bashrc
-chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/.nvm
+chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/.nvm
 sudo -u $INSTALLATION_USER . ~/.bashrc
 sudo -u $INSTALLATION_USER nvm install $NODE_VERSION
 sudo -u $INSTALLATION_USER nvm use $NODE_VERSION
@@ -89,7 +89,7 @@ rm -rf /home/$INSTALLATION_USER/Downloads/nightly.tar.bz2
 mv /home/$INSTALLATION_USER/firefox* /home/$INSTALLATION_USER/.nightly
 mkdir /home/$INSTALLATION_USER/bin
 ln -s /home/$INSTALLATION_USER/.nightly/firefox /home/$INSTALLATION_USER/bin/nightly
-chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/.nightly
-chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/bin
+chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/.nightly
+chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/bin
 chmod 700 /home/$INSTALLATION_USER/bin/nightly
 echo 'export PATH=$PATH:$HOME/bin' >> /home/$INSTALLATION_USER/.bashrc
