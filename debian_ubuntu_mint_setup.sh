@@ -49,9 +49,8 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/$INSTALLATION_USER/.bashrc
 echo 'eval "$(rbenv init -)"' >> /home/$INSTALLATION_USER/.bashrc
 git clone https://github.com/rbenv/ruby-build.git /home/$INSTALLATION_USER/.rbenv/plugins/ruby-build
 chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv
-sudo -u $INSTALLATION_USER . ~/.bashrc
-sudo -u $INSTALLATION_USER rbenv install $RUBY_VERSION
-sudo -u $INSTALLATION_USER rbenv local $RUBY_VERSION
+sudo -H -u $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv/bin/rbenv install $RUBY_VERSION
+sudo -H -u $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv/bin/rbenv local $RUBY_VERSION
 
 # Install Scala
 # Install scala-sbt. See http://www.scala-sbt.org/download.html
@@ -78,9 +77,13 @@ git clone https://github.com/creationix/nvm /home/$INSTALLATION_USER/.nvm
 echo 'export NVM_DIR=$HOME/.nvm' >> /home/$INSTALLATION_USER/.bashrc
 echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> /home/$INSTALLATION_USER/.bashrc
 chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/.nvm
-sudo -u $INSTALLATION_USER . ~/.bashrc
-sudo -u $INSTALLATION_USER nvm install $NODE_VERSION
-sudo -u $INSTALLATION_USER nvm use $NODE_VERSION
+echo "source /home/$INSTALLATION_USER/.bashrc" >> /home/$INSTALLATION_USER/nvmscript.sh
+echo "nvm install $NODE_VERSION" >> /home/$INSTALLATION_USER/nvmscript.sh
+echo "nvm use $NODE_VERSION" >> /home/$INSTALLATION_USER/nvmscript.sh
+chmod 700 /home/$INSTALLATION_USER/nvmscript.sh
+chown $INSTALLATION_USER /home/$INSTALLATION_USER/nvmscript.sh
+su $INSTALLATION_USER -c /home/$INSTALLATION_USER/nvmscript.sh
+rm -f /home/$INSTALLATION_USER/nvmscript.sh
 
 # Install Firefox Nightly
 wget -O /home/$INSTALLATION_USER/Downloads/nightly.tar.bz2 $FIREFOX_NIGHTLY_URL
