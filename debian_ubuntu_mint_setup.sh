@@ -40,7 +40,7 @@ pip3 -m install --upgrade pip
 pip3 install ipython numpy scipy matplotlib scikit-learn pandas sympy nose jupyter
 
 # Install Ruby. See https://github.com/rbenv/ruby-build/wiki
-yes | apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+yes | apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev libsqlite3-dev ruby-dev zlib1g-dev
 git clone https://github.com/rbenv/rbenv.git /home/$INSTALLATION_USER/.rbenv
 cd /home/$INSTALLATION_USER/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/$INSTALLATION_USER/.bashrc
