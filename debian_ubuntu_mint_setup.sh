@@ -7,6 +7,7 @@ SCALA_URL='http://downloads.lightbend.com/scala/2.12.1/scala-2.12.1.tgz'
 GOLANG_URL='https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz'
 FIREFOX_NIGHTLY_URL='https://archive.mozilla.org/pub/firefox/nightly/latest-mozilla-central/firefox-53.0a1.en-US.linux-x86_64.tar.bz2'
 JAVA_VERSION=8
+RUBY_VERSION=2.3.3
 NODE_VERSION=6.9.2
 
 # Update the system before installing the programs
@@ -48,6 +49,9 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/$INSTALLATION_USER/.bashrc
 echo 'eval "$(rbenv init -)"' >> /home/$INSTALLATION_USER/.bashrc
 git clone https://github.com/rbenv/ruby-build.git /home/$INSTALLATION_USER/.rbenv/plugins/ruby-build
 chown -R $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv
+sudo -u $INSTALLATION_USER . ~/.bashrc
+sudo -u $INSTALLATION_USER rbenv install $RUBY_VERSION
+sudo -u $INSTALLATION_USER rbenv local $RUBY_VERSION
 
 # Install Scala
 # Install scala-sbt. See http://www.scala-sbt.org/download.html
