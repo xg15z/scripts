@@ -74,7 +74,7 @@ echo 'export GOROOT=/usr/local/go' >> /home/$INSTALLATION_USER/.bashrc
 echo 'export PATH=$PATH:$GOROOT/bin' >> /home/$INSTALLATION_USER/.bashrc
 
 # Instal Node.js. See https://github.com/creationix/nvm
-git clone https://github.com/creationx/nvm.git /home/$INSTALLATION_USER/.nvm
+git clone https://github.com/creationix/nvm /home/$INSTALLATION_USER/.nvm
 echo 'export NVM_DIR=$HOME/.nvm' >> /home/$INSTALLATION_USER/.bashrc
 echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> /home/$INSTALLATION_USER/.bashrc
 chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/.nvm
