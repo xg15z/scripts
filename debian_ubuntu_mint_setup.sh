@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run this script as superuser
+# Run this script as root
 
 # Change the variables below to customize
 INSTALLATION_USER='mark'
@@ -49,6 +49,7 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /home/$INSTALLATION_USER/.bashrc
 echo 'eval "$(rbenv init -)"' >> /home/$INSTALLATION_USER/.bashrc
 git clone https://github.com/rbenv/ruby-build.git /home/$INSTALLATION_USER/.rbenv/plugins/ruby-build
 chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv
+# Run rbenv install and rbenv local as $INSTALLATION_USER, rather than root
 sudo -H -u $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv/bin/rbenv install $RUBY_VERSION
 sudo -H -u $INSTALLATION_USER /home/$INSTALLATION_USER/.rbenv/bin/rbenv local $RUBY_VERSION
 
@@ -77,11 +78,15 @@ git clone https://github.com/creationix/nvm /home/$INSTALLATION_USER/.nvm
 echo 'export NVM_DIR=$HOME/.nvm' >> /home/$INSTALLATION_USER/.bashrc
 echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> /home/$INSTALLATION_USER/.bashrc
 chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/.nvm
+# Make nvmscript.sh, which is to be run on $INSTALLATION_USER's shell.
+# Double quotation marks are used here to load the values of $ variables,
+# instead of the litral strings.
 echo "source /home/$INSTALLATION_USER/.bashrc" >> /home/$INSTALLATION_USER/nvmscript.sh
 echo "nvm install $NODE_VERSION" >> /home/$INSTALLATION_USER/nvmscript.sh
 echo "nvm use $NODE_VERSION" >> /home/$INSTALLATION_USER/nvmscript.sh
 chmod 700 /home/$INSTALLATION_USER/nvmscript.sh
 chown $INSTALLATION_USER /home/$INSTALLATION_USER/nvmscript.sh
+# Run nvmscript.sh on $INSTALLATION_USER's shell and delete the script afterwards
 su $INSTALLATION_USER -c /home/$INSTALLATION_USER/nvmscript.sh
 rm -f /home/$INSTALLATION_USER/nvmscript.sh
 
