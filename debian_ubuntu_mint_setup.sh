@@ -16,10 +16,10 @@ yes | apt upgrade
 yes | apt dist-upgrade
 
 # Install multimedia tools
-yes | apt install amarok flac vorbis-tools libmp3lame0 vlc okular okular-extra-backends
+yes | apt install amarok flac vorbis-tools lame libmp3lame0 vlc okular okular-extra-backends
 
 # Install desktop applications
-yes | apt install dropbox gedit gnucash shutter 
+yes | apt install dropbox gedit gnucash shutter filezilla
 
 # Install command-line applications
 yes | apt install git git-doc git-man pandoc openssh-server tmux vim-nox
