@@ -16,7 +16,7 @@ yes | apt upgrade
 yes | apt dist-upgrade
 
 # Install multimedia tools
-yes | apt install amarok flac vorbis-tools lame libmp3lame0 vlc okular okular-extra-backends soundconverter
+yes | apt install amarok flac vorbis-tools lame libmp3lame0 vlc okular okular-extra-backends soundconverter easytag easytag-nautilus
 
 # Install desktop applications
 yes | apt install dropbox gedit gnucash shutter filezilla
