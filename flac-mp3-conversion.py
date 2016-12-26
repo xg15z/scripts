@@ -23,13 +23,14 @@ for music_file in all_files:
     new_path = old_absolute_path[:-len(old_relative_path)-len('/flac')-1] \
                 + 'mp3/' + old_relative_path + '/'
     old_file = old_absolute_path + old_filename
-    new_file = new_path + new_filename
+    new_mp3 = old_absolute_path + new_filename
+    new_mp3_correct_path = new_path + new_filename
 
     print(old_absolute_path + old_filename, " => ", new_file)
 
     AudioSegment.from_file(music_file).export(
             new_filename, format='mp3', bitrate='320k')
     os.makedirs(new_path, exist_ok=True)
-    os.rename(old_file, new_file)
+    os.rename(new_mp3, new_mp3_correct_path)
 
 print("Conversion completed in ", time.time() - start_time, " seconds.")
