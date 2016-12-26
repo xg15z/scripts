@@ -8,7 +8,8 @@ GOLANG_URL='https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz'
 FIREFOX_NIGHTLY_URL='https://archive.mozilla.org/pub/firefox/nightly/latest-mozilla-central/firefox-53.0a1.en-US.linux-x86_64.tar.bz2'
 JAVA_VERSION=8
 RUBY_VERSION=2.3.3
-PYTHON_VERSION=3.6.0
+PYTHON3_VERSION=3.6.0
+PYTHON2_VERSION=2.7.13
 NODE_VERSION=6.9.2
 
 # Update the system before installing the programs
@@ -45,8 +46,9 @@ echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> /home/$INSTALLATION_USER/.bashrc
 echo 'eval "$(pyenv init -)"' >> /home/$INSTALLATION_USER/.bashrc
 chown -Rv $INSTALLATION_USER /home/$INSTALLATION_USER/.pyenv
 # Run pyenv install and pyenv local as $INSTALLATION_USER, rather than root
-sudo -H -u $INSTALLATION_USER /home/$INSTALLATION_USER/.pyenv/bin/pyenv install $PYTHON_VERSION
-sudo -H -u $INSTALLATION_USER /home/$INSTALLATION_USER/.pyenv/bin/pyenv local $PYTHON_VERSION
+sudo -H -u $INSTALLATION_USER /home/$INSTALLATION_USER/.pyenv/bin/pyenv install $PYTHON3_VERSION
+sudo -H -u $INSTALLATION_USER /home/$INSTALLATION_USER/.pyenv/bin/pyenv install $PYTHON2_VERSION
+sudo -H -u $INSTALLATION_USER /home/$INSTALLATION_USER/.pyenv/bin/pyenv local $PYTHON3_VERSION
 
 # Install Ruby. See https://github.com/rbenv/ruby-build/wiki
 yes | apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev libsqlite3-dev ruby-dev zlib1g-dev
