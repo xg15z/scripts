@@ -39,7 +39,7 @@ yes | apt install openjdk-$JAVA_VERSION-jre openjdk-$JAVA_VERSION-jre-headless o
 yes | apt install racket
 
 # Install Python. See https://github.com/yyuu/pyenv
-yes | apt install libbz2-dev
+yes | apt install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils
 git clone https://github.com/yyuu/pyenv.git /home/$INSTALLATION_USER/.pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> /home/$INSTALLATION_USER/.bashrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> /home/$INSTALLATION_USER/.bashrc
