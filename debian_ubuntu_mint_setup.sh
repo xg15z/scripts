@@ -34,6 +34,9 @@ yes | apt install texlive-full kile
 
 # Install Java
 yes | apt install openjdk-$JAVA_VERSION-jre openjdk-$JAVA_VERSION-jre-headless openjdk-$JAVA_VERSION-jdk openjdk-$JAVA_VERSION-jdk-headless
+echo 'export JAVA_HOME=/usr' >> /home/$INSTALLATION_USER/.bashrc
+echo 'export PATH=$PATH:$JAVA_HOME/bin'
+touch /usr/release
 
 # Install Racket
 yes | apt install racket
