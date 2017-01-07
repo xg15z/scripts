@@ -10,12 +10,17 @@ JAVA_VERSION=8
 RUBY_VERSION=2.4.0
 PYTHON3_VERSION=3.6.0
 PYTHON2_VERSION=2.7.13
-NODE_VERSION=6.9.2
+NODE_VERSION=6.9.4
 
 # Update the system before installing the programs
 apt update
 yes | apt upgrade
 yes | apt dist-upgrade
+
+# Install UNIX tools
+yes | apt install sudo cups printer-driver-cups-pdf
+systemctl stop cups-browsed.service
+systemctl disable cups-browsed.service
 
 # Install multimedia tools
 yes | apt install amarok flac vorbis-tools lame libmp3lame0 vlc okular okular-extra-backends soundconverter easytag easytag-nautilus
@@ -27,7 +32,7 @@ yes | apt install dropbox gedit gnucash shutter filezilla
 yes | apt install git git-doc git-man pandoc openssh-server tmux vim-nox
 
 # Install Korean fonts and input tools
-yes | apt install fonts-nanum ibus-hangul
+yes | apt install fonts-nanum uim uim-gtk3 uim-byeoru
 
 # Install LaTeX tools
 yes | apt install texlive-full kile
